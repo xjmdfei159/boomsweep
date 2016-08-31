@@ -72,10 +72,10 @@ def main():
 	kabi = BoomMap(10, 10)
 	kabi.show_boom()
 	kabi.show_board()
-	guess_row = int(raw_input("guess row"))
-	guess_col = int(raw_input("guess col"))
+	guess_row = int(raw_input("guess row:"))
+	guess_col = int(raw_input("guess col:"))
 	a = kabi.boom_pos(guess_row - 1,guess_col)
 	print(a)
 
-if __name__ == "main":
+if __name__ == "__main__":
 	main()
