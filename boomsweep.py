@@ -19,7 +19,7 @@ class BoomMap(object):
 		self._board = []
 		self._boommap = []
 		self._boomnum = 50
-
+		self._boomposlist = []
 		for i in range(col):
 			self._board.append(["0"] * row)
 
@@ -40,32 +40,17 @@ class BoomMap(object):
 			boom = self._boommap[i]
 			self._board[boom[0]][boom[1]] = "X"
 
-	def boom_pos(self, row, col):
+	def boom_pos(self):
+		self._boomposlist = [[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]]
+		return self._boomposlist
+
+	def boom_posnum(self, row, col):
 		count = 0
-		if row - 1 >= 0 and col - 1 >= 0:
-			if self._board[row-1][col-1] == "X":
-				count +=1
-		if row >= 0 and col - 1 >= 0:
-			if self._board[row][col-1] == "X":
-				count +=1
-		if row + 1 >= 0 and col - 1 >= 0:
-			if self._board[row+1][col-1] == "X":
-				count +=1
-		if row - 1 >= 0 and col >= 0:
-			if self._board[row-1][col] == "X":
-				count +=1
-		if row + 1 >= 0 and col >= 0:
-			if self._board[row+1][col] == "X":
-				count +=1
-		if row - 1 >= 0 and col + 1 >= 0:
-			if self._board[row-1][col+1] == "X":
-				count +=1
-		if row >= 0 and col + 1 >= 0:
-			if self._board[row][col+1] == "X":
-				count +=1
-		if row + 1 >= 0 and col + 1 >= 0:
-			if self._board[row-1][col+1] == "X":
-				count +=1
+		basicpos = self.boom_pos()
+		for i,boom in enumerate(basicpos):
+			if row + boom[0] >= 0 and col + boom[1] >= 0 and row + boom[0] <= 9 and col + boom[1] <= 9:
+				if self._board[row + boom[0]][col + boom[1]] == "X":
+					count +=1
 		return count
 
 def main():
@@ -74,8 +59,8 @@ def main():
 	kabi.show_board()
 	guess_row = int(raw_input("guess row:"))
 	guess_col = int(raw_input("guess col:"))
-	a = kabi.boom_pos(guess_row - 1,guess_col)
-	print(a)
+	b = kabi.boom_posnum(guess_row, guess_col)
+	print(b)
 
 if __name__ == "__main__":
 	main()
