@@ -60,7 +60,7 @@ def main():
 	guess_row = int(raw_input("guess row:"))
 	guess_col = int(raw_input("guess col:"))
 	b = kabi.boom_posnum(guess_row, guess_col)
-	print(b)
+	
 
 if __name__ == "__main__":
 	main()
